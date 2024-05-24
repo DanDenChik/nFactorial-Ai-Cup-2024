@@ -1,17 +1,14 @@
-import Head from 'next/head';
-import Layout from './utils/layout';
+"use client";
 
-const Home = () => {
+import { NextPage } from 'next';
+import React from 'react';
+
+const HomePage: NextPage = () => {
   return (
-    <Layout>
-      <Head>
-        <title>Home Page</title>
-      </Head>
-      <main className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1 className="text-4xl font-bold">Welcome to Next.js with TypeScript and Tailwind CSS</h1>
-      </main>
-    </Layout>
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      <h1 className="text-4xl font-bold">Welcome to Instagram Analysis Tool</h1>
+    </div>
   );
 };
 
-export default Home;
+export default HomePage;
