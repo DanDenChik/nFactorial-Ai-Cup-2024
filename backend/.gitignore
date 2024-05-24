@@ -1,0 +1,56 @@
+# Python bytecode
+*.pyc
+__pycache__/
+
+# Virtual environment
+venv/
+.env
+*.env
+
+# Django stuff:
+*.log
+*.pot
+*.py[cod]
+*.sqlite3
+db.sqlite3
+media/
+
+# If you are using PyCharm:
+.idea/
+
+# If you are using VSCode:
+.vscode/
+
+# Node modules (if any)
+node_modules/
+
+# OS generated files #
+######################
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+.coverage.*
+.cache
+.pytest_cache/
+
+# Translations
+*.mo
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# SQL dumps
+*.sql
+
+# Credentials
+*.pem
+
+# Pyre type checker
+.pyre/
