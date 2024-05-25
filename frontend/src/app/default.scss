@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "daisyui/dist/full.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --speed: 500ms;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+label {
+  cursor: default;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+mark {
+  border-radius: 20px;
+  padding: 0.3rem;
+  background-color: #1E222E;
+  color: white;
+}
+
+.dropDown {
+  position: absolute;
+  left: 50%;
+  top: 200%;
+  transform: translate(-50%, 0);
+  margin: 0 !important;
+}
+
+.fontRaleway {
+  font-family: 'Raleway', sans-serif;
+}
+
+.fontInter {
+  font-family: 'Inter', sans-serif;
+}

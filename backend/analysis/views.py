@@ -5,10 +5,8 @@ from django.shortcuts import get_object_or_404, render
 from .models import InstagramProfile, InstagramPost, InstagramImage, InstagramComment
 from .serializers import InstagramProfileSerializer
 from .tasks import fetch_instagram_data_task
-from celery.result import AsyncResult
 import openai
 from .analyze_func import analyze_posts, analyze_comments, analyze_post_times
-import instaloader
 import constants
 
 openai.api_key = constants.OPEN_AI_KEY
@@ -26,27 +24,19 @@ def fetch_instagram_data(request):
         return Response(
             {"error": "Username is required"}, status=status.HTTP_400_BAD_REQUEST
         )
-
-    task = fetch_instagram_data_task.delay(username)
-
+    task = fetch_instagram_data_task(username)
     return Response({"task_id": task.id, "status": "Task started"})
 
 
 @api_view(["GET"])
 def get_task_status(request, task_id):
-    task_result = AsyncResult(task_id)
-    if task_result.state == "PENDING":
-        response = {"state": task_result.state, "status": "Pending..."}
-    elif task_result.state != "FAILURE":
-        response = {
-            "state": task_result.state,
-            "progress": task_result.info.get("progress", 0),
-            "status": task_result.info.get("status", ""),
-        }
+    task_result = fetch_instagram_data_task.result(task_id)
+    if task_result is None:
+        response = {"state": "PENDING", "status": "Pending..."}
     else:
         response = {
-            "state": task_result.state,
-            "status": str(task_result.info),
+            "state": "SUCCESS",
+            "result": task_result,
         }
     return Response(response)
 

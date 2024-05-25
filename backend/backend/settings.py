@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from huey import RedisHuey
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,8 +30,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -40,26 +40,16 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "users",
-    "channels",
     "analysis",
-    "django_celery_results",
+    "huey.contrib.djhuey",
 ]
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    },
-}
-
-CELERY_BROKER_URL = "redis://localhost:6379/0"
-CELERY_RESULT_BACKEND = "django-db"
-CELERY_ACCEPT_CONTENT = ["json"]
-CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_SERIALIZER = "json"
-CELERY_TIMEZONE = "UTC"
+HUEY = RedisHuey(
+    'backend',
+    host='127.0.0.1',
+    port=6379,
+    db=0,
+)
 
 AUTH_USER_MODEL = "users.User"
 
@@ -115,7 +105,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "backend.wsgi.application"
-ASGI_APPLICATION = "backend.asgi.application"
 
 
 # Database
